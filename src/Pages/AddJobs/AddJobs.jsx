@@ -1,14 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const Home = () => {
+const AddJob = () => {
     return (
         <div>
             <Helmet>
-                <title>Job24 | Home</title>
+                <title>Job24 | Add Job</title>
             </Helmet>
         </div>
     );
 };
 
-export default Home;
+export default AddJob;

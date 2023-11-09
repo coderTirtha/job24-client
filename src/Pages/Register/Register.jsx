@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom';
-import login from '../../assets/images/logged.gif';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import register from '../../assets/images/login.gif';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
-
-const Login = () => {
-    const {user, loading, signInUser} = useContext(AuthContext);
-    const handleLogIn = e => {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const Register = () => {
+    const {user, loading, createUser} = useContext(AuthContext);
+    const handleRegister = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
+        const name = form.get('name');
         const email = form.get('email');
         const password = form.get('password');
-        signInUser(email, password)
+        createUser(email, password)
         .then(result => {
-            if(result.user) {
-                toast.success("Successfully Logged In!");
-            }
+            const user = result.user;
+            console.log(user);
+            toast.success("User Profile Created Successfully!");
         })
         .catch(error => {
             toast.error(error.message);
@@ -25,12 +25,18 @@ const Login = () => {
     return (
         <div className='flex flex-col md:flex-row-reverse my-12'>
             <div className='flex-1'>
-                <img src={login} alt="" />
+                <img src={register} alt="" />
             </div>
             <div className='flex-1 flex justify-center items-center rounded-md p-4 m-4 border-2 border-gray-300'>
-                <div className='w-full'>
-                    <h1 className='text-4xl font-bold text-center'>Login Now!</h1>
-                    <form className='mt-4' onSubmit={handleLogIn}>
+                <div className=''>
+                    <h1 className='text-4xl font-bold text-center'>Register your Identity!</h1>
+                    <form className='mt-4' onSubmit={handleRegister}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="Name" placeholder="Name" name='name' className="input input-bordered" required />
+                        </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -43,10 +49,10 @@ const Login = () => {
                             </label>
                             <input type="password" placeholder="Password" name='password' className="input input-bordered" required />
                         </div>
-                        <input type="submit" value="Login" className='btn btn-block btn-outline text-[#D90429] hover:bg-[#D90429] hover:text-white hover:border-[#D90429] mt-6' />
+                        <input type="submit" value="Register" className='btn btn-block btn-outline text-[#D90429] hover:bg-[#D90429] hover:text-white hover:border-[#D90429] mt-6' />
                     </form>
                     <div className='text-center mt-8 mb-4'>
-                        <p>Don't have an account? <Link className='text-[#EF233C] font-bold' to={'/register'}>Register</Link></p>
+                        <p>Already have an account? <Link className='text-[#EF233C] font-bold' to={'/login'}>Login</Link></p>
                     </div>
                 </div>
             </div>
@@ -55,4 +61,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

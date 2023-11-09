@@ -5,18 +5,25 @@ import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Register = () => {
-    const {user, loading, createUser} = useContext(AuthContext);
+    const {user, loading, createUser, updateUser} = useContext(AuthContext);
     const handleRegister = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const name = form.get('name');
+        const photo = form.get('photo');
         const email = form.get('email');
         const password = form.get('password');
         createUser(email, password)
         .then(result => {
             const user = result.user;
             console.log(user);
-            toast.success("User Profile Created Successfully!");
+            updateUser(name, photo)
+            .then(res => {
+                toast.success("User Profile Created Successfully!");
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
         })
         .catch(error => {
             toast.error(error.message);
@@ -35,7 +42,13 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="Name" placeholder="Name" name='name' className="input input-bordered" required />
+                            <input type="text" placeholder="Name" name='name' className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input type="url" placeholder="Photo URL" name='photo' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

@@ -5,7 +5,7 @@ const Footer = () => {
         <div>
             <footer className="footer p-10 bg-base-200 text-base-content">
                 <aside>
-                    <img src={logo} alt="" className='w-[150px]' />
+                    <img src={logo} alt="" className='w-[80px]' />
                     <p>Job24 Ltd. Inc. <br />Providing reliable job since 2008</p>
                 </aside>
                 <nav>

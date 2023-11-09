@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile} from 'firebase/auth';
 import app from '../../firebase/firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -20,6 +21,10 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    const updateUser = (name, photo) => {
+        return updateProfile(auth.currentUser, { displayName: name, photoURL: photo});
+    }
+
     const logOutUser = () => {
         setLoading(true);
         return signOut(auth);
@@ -27,15 +32,29 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = {email: userEmail}
             setUser(currentUser);
             console.log("Current User", currentUser);
             setLoading(false);
+            if(currentUser) {
+                axios.post('http://localhost:5000/jwt', loggedUser, {withCredentials: true})
+                .then(res => {
+                    console.log(res.data);
+                });
+            }
+            else {
+                axios.post('http://localhost:5000/logout', loggedUser, {withCredentials: true})
+                .then(res => {
+                    console.log(res.data);
+                })
+            }
         });
         return () => {
             unSubscribe();
         }
     }, []);
-    const authInfo = {user, loading, createUser, signInUser, logOutUser}
+    const authInfo = {user, loading, createUser, signInUser, updateUser, logOutUser}
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

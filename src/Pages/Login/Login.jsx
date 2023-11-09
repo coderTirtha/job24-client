@@ -1,33 +1,44 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/images/logged.gif';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider/AuthProvider';
+import axios from 'axios';
 
 const Login = () => {
-    const {user, loading, signInUser} = useContext(AuthContext);
+    const { user, loading, signInUser } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
     const handleLogIn = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const email = form.get('email');
         const password = form.get('password');
         signInUser(email, password)
-        .then(result => {
-            if(result.user) {
-                toast.success("Successfully Logged In!");
-            }
-        })
-        .catch(error => {
-            toast.error(error.message);
-        })
+            .then(result => {
+                const user = result.user;
+                const loggedUser = { email }
+                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        if (res.data.success) {
+                            toast.success("Successfully Logged In!");
+                            setTimeout(() => {
+                                navigate(location?.state ? location.state : '/');
+                            }, 3000);
+                        }
+                    })
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
     }
     return (
-        <div className='flex flex-col md:flex-row-reverse my-12'>
+        <div className='flex flex-col md:flex-row-reverse gap-4 my-12'>
             <div className='flex-1'>
                 <img src={login} alt="" />
             </div>
-            <div className='flex-1 flex justify-center items-center rounded-md p-4 m-4 border-2 border-gray-300'>
+            <div className='flex-1 flex justify-center items-center rounded-md p-4 border-2 border-gray-300'>
                 <div className='w-full'>
                     <h1 className='text-4xl font-bold text-center'>Login Now!</h1>
                     <form className='mt-4' onSubmit={handleLogIn}>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BsChevronRight, BsBriefcaseFill } from "react-icons/bs";
 import { BiData, BiLogIn } from 'react-icons/bi';
 import { AiOutlineHome, AiOutlinePullRequest } from 'react-icons/ai';
@@ -6,8 +5,8 @@ import { GiNotebook } from 'react-icons/gi';
 import logoWhite from '../../assets/images/logoWhite.png';
 import { Link, NavLink } from "react-router-dom";
 
-const Sidebar = () => {
-    const [open, setOpen] = useState(true);
+const Sidebar = ({open, setOpen}) => {
+    
     const menus = <>
         <li className="text-gray-300 cursor-pointer duration-150 mt-2" title="Home">
             <NavLink to='/' className={`flex items-center p-2 gap-x-4 rounded-md hover:bg-[#8D99AE] transition ease-linear duration-200`}>
@@ -38,7 +37,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div className={`${open ? 'w-64' : 'w-20'} bg-[#2B2D42] duration-150 h-screen relative`}>
+            <div className={`${open ? 'w-64' : 'w-20'} bg-[#2B2D42] duration-150 h-screen fixed`}>
                 <button className={`btn btn-circle absolute top-6 -right-5 border-4 border-[#2B2D42] hover:border-[#2B2D42] ${open && 'rotate-180'} z-10`} onClick={() => setOpen(!open)}>
                     <BsChevronRight className="font-bold" />
                 </button>

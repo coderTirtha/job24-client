@@ -6,12 +6,13 @@ import Footer from './Shared/Footer/Footer';
 const Root = () => {
     return (
         <div>
-            <div>
+            <div className='flex'>
                 <Sidebar></Sidebar>
-            </div>
-            <div>
-                <Outlet></Outlet>
-                <Footer></Footer>
+
+                <div>
+                    <Outlet></Outlet>
+                    <Footer></Footer>
+                </div>
             </div>
         </div>
     );

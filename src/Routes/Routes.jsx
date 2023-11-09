@@ -4,6 +4,7 @@ import Root from "../Root";
 import Home from "../Pages/Home/Home";
 import AddJob from "../Pages/AddJobs/AddJobs";
 import PostedJobs from "../Pages/PostedJobs/PostedJobs";
+import Login from "../Pages/Login/Login";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: '/postedJobs',
                 element: <PostedJobs></PostedJobs>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
             }
         ]
     }

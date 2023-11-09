@@ -38,7 +38,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div className={`${open ? 'w-64' : 'w-20'} bg-[#2B2D42] duration-150 h-screen fixed`}>
+            <div className={`${open ? 'w-64' : 'w-20'} bg-[#2B2D42] duration-150 h-screen relative`}>
                 <button className={`btn btn-circle absolute top-6 -right-5 border-4 border-[#2B2D42] hover:border-[#2B2D42] ${open && 'rotate-180'} z-10`} onClick={() => setOpen(!open)}>
                     <BsChevronRight className="font-bold" />
                 </button>

@@ -9,7 +9,7 @@ const Jobs = () => {
     const { user } = useContext(AuthContext);
     const [jobs, setJobs] = useState([]);
     const [category, setCategory] = useState('Web-Development');
-    const url = `http://localhost:5000/jobs/category?email=${user?.email}&category=${category}`;
+    const url = `https://job24-server.vercel.app/jobs/category?email=${user?.email}&category=${category}`;
     useEffect(() => {
         axios.get(url, { withCredentials: true })
             .then(res => {

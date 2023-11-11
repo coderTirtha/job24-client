@@ -18,7 +18,7 @@ const AddJob = () => {
         const description = form.get('description');
         const newJob = { jobTitle, deadline, email, category, minPrice, maxPrice, description }
         console.log(newJob);
-        fetch('http://localhost:5000/jobs', {
+        fetch('https://job24-server.vercel.app/jobs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

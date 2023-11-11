@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const MyBids = () => {
     const { user } = useContext(AuthContext);
     const [myBids, setMyBids] = useState([]);
-    const url = `http://localhost:5000/myBids?email=${user?.email}`;
+    const url = `https://job24-server.vercel.app/myBids?email=${user?.email}`;
     useEffect(() => {
         axios.get(url, { withCredentials: true })
             .then(res => {
@@ -14,6 +15,9 @@ const MyBids = () => {
     }, [url]);
     return (
         <div className="my-12">
+            <Helmet>
+                <title>Job24 | My Bids</title>
+            </Helmet>
             <h1 className="text-4xl font-bold text-center">You have bid for {myBids.length} projects</h1>
             <div className="overflow-x-auto my-20">
                 <table className="table">

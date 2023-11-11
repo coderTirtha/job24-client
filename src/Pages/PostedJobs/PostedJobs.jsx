@@ -7,7 +7,7 @@ import Job from './Job';
 const PostedJobs = () => {
     const [postedJobs, setPostedJobs] = useState([]);
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/jobs?email=${user?.email}`;
+    const url = `https://job24-server.vercel.app/jobs?email=${user?.email}`;
     useEffect(() => {
         axios.get(url, { withCredentials: true })
             .then(res => {

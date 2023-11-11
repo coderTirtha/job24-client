@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const BidRequests = () => {
     const { user } = useContext(AuthContext);
     const [bidRequests, setBidRequests] = useState([]);
-    const url = `http://localhost:5000/bidRequests?email=${user?.email}`;
+    const url = `https://job24-server.vercel.app/bidRequests?email=${user?.email}`;
     useEffect(() => {
         axios.get(url, { withCredentials: true })
             .then(res => {
@@ -13,7 +14,7 @@ const BidRequests = () => {
             })
     }, [url]);
     const handleAccept = id => {
-        const url = `http://localhost:5000/bidRequests/${id}?email=${user?.email}`;
+        const url = `https://job24-server.vercel.app/bidRequests/${id}?email=${user?.email}`;
         const updatedStatus = {status : 'confirmed'}
         axios.patch(url, updatedStatus, {withCredentials: true})
         .then(res => {
@@ -27,7 +28,7 @@ const BidRequests = () => {
         });
     }
     const handleDecline = id => {
-        const url = `http://localhost:5000/bidRequests/${id}?email=${user?.email}`;
+        const url = `https://job24-server.vercel.app/bidRequests/${id}?email=${user?.email}`;
         const updatedStatus = {status : 'declined'}
         axios.patch(url, updatedStatus, {withCredentials: true})
         .then(res => {
@@ -42,6 +43,9 @@ const BidRequests = () => {
     }
     return (
         <div className="my-12">
+            <Helmet>
+                <title>Job24 | Bid Requests</title>
+            </Helmet>
             <h1 className="text-4xl text-center font-bold">You have total {bidRequests.length} bid requests</h1>
             <div className="overflow-x-auto my-20">
                 <table className="table">

@@ -18,7 +18,7 @@ const JobDetails = () => {
         const ownerEmail = email;
         const bidderEmail = user?.email;
         const newBid = {bidPrice, deadline, ownerEmail, bidderEmail, status: 'pending'}
-        axios.post('http://localhost:5000/bids', newBid)
+        axios.post('https://job24-server.vercel.app/bids', newBid)
         .then(res => {
             if(res.data.insertedId) {
                 toast.success("You have successfully bid!");

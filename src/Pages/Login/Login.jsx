@@ -19,7 +19,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 const loggedUser = { email }
-                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                axios.post('https://job24-server.vercel.app/jwt', loggedUser, { withCredentials: true })
                     .then(res => {
                         if (res.data.success) {
                             toast.success("Successfully Logged In!");

@@ -1,7 +1,7 @@
-const Job = ({job}) => {
-    const {jobTitle, deadline, email, category, minPrice, maxPrice, description} = job;
+const Job = ({ job }) => {
+    const { jobTitle, deadline, email, category, minPrice, maxPrice, description } = job;
     return (
-        <div className="border-2 border-gray-200 rounded-md p-2 space-y-3">
+        <div className="border-2 border-gray-200 rounded-md px-4 py-2 space-y-3">
             <h1 className="text-2xl font-bold">{jobTitle}</h1>
             <h3><span className="text-[#EF233C] font-bold">Deadline : </span>{deadline}</h3>
             <hr />

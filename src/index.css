@@ -5,3 +5,7 @@
 .active {
     @apply bg-[#EDF2F4] text-black p-2 rounded-md;
 }
+
+.tab-on-active {
+    @apply bg-[#2B2D42] text-gray-200 rounded-md;
+}

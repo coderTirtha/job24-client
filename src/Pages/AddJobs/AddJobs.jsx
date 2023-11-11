@@ -65,9 +65,9 @@ const AddJob = () => {
                             <span className="label-text">Category</span>
                         </label>
                         <select name="category" className='input input-bordered' id="">
-                            <option value="Web Development">Web Development</option>
-                            <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="Graphics Design">Graphics Design</option>
+                            <option value="Web-Development">Web-Development</option>
+                            <option value="Digital-Marketing">Digital-Marketing</option>
+                            <option value="Graphics-Design">Graphics-Design</option>
                         </select>
                     </div>
                     <div className='flex gap-2'>

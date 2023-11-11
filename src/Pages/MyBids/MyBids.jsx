@@ -42,7 +42,7 @@ const MyBids = () => {
                                     {
                                         bid?.status === 'pending' ?
                                             <button className="btn btn-sm">{bid?.status}</button> :
-                                            <p>{bid?.status}</p>
+                                            <p className={`${bid?.status === 'confirmed' ? 'text-green-500' : 'text-red-500'}`}>{bid?.status}</p>
 
                                     }
                                 </td>
